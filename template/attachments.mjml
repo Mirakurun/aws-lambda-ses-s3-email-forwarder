@@ -1,0 +1,16 @@
+<mjml>
+  <mj-body background-color="white" width="">
+    <mj-section>
+      <mj-column width="100%">
+        <mj-divider border-color="grey" border-width="1px" padding="10px 0" />
+        <mj-text v-if="attachments.length > 1" font-weight="700" padding="10px 0">
+          {{ attachments.length }} Attachments
+        </mj-text>
+        <mj-text v-for="(attachment, index) in attachments" :key="index" padding="10px 0" font-weight="700" font-size="14px">
+          <a :href="getFileURL(index, attachment.filename)" style="font-family: Ubuntu; margin-right: 5px">{{ attachment.filename }}</a>
+          <span style="font-family: Ubuntu; color: gray">{{ getFilesize(attachment.size) }}</span>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
