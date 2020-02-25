@@ -2,7 +2,7 @@
 
 > WIP
 
-A Node.js Lambda function that utilizes Amazon SES to forward incoming emails from SES delivered to a S3 bucket to an email address.
+A Node.js Lambda function that utilizes Amazon SES to forward incoming emails delivered to a S3 bucket from SES to an email address.
 
 ## Features
 
