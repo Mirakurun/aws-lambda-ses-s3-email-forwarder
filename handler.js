@@ -39,6 +39,7 @@ module.exports.forwarder = async event => {
     const { html } = parsed;
     const sender = name || address;
 
+    console.log('Processing message...');
     const message = {
       from: `${sender} <${config.from}>`,
       replyTo: parsed.from.text.split(',')[0],
