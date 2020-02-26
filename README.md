@@ -3,7 +3,7 @@
 A Node.js Lambda function that utilizes Amazon SES to forward incoming emails to an email address inbox. Setup Amazon SES to receive emails and deliver to a S3 bucket, then invoke lambda to forward the email to your email of choice.
 
 ## Architecture Diagram
-![Alt](diagram/diagram.svg)
+![Diagram](diagram/diagram.svg)
 
 ## Features
 
@@ -26,6 +26,7 @@ npm install
 ```
 
 ## Configuration
+Create the following file inside the config folder.
 
 ### `config.js`
 
@@ -60,11 +61,13 @@ serverless deploy --package .serverless
 [Create a receipt rule set](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html)
 
 1. [Create recipients](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html)
-2. [Create 2 actions](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action.html)
+2. [Create 2 actions in this exact order. S3 first, then Lambda.](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action.html)
     1. [S3 action](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-s3.html)
         * S3 bucket - The name of the Amazon S3 bucket to which to save received emails.
-        * Object key prefix - A key name prefix to use within the Amazon S3 bucket.(for example, email/)
+        * Object key prefix - A key name prefix to use within the Amazon S3 bucket. (for example, email/)
         * Uncheck encrypt message (NOT RECOMMENDED because S3 client-side encryption is currently not supported for JavaScript.  [See documentation](https://docs.aws.amazon.com/general/latest/gr/aws_sdk_cryptography.html))
+        * SNS Topic - Choose "None"
     2. [Lambda action](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-lambda.html)
         * Lambda function: Choose the function that you created during deployment.
         * Invocation type: Choose "Event"
+        * SNS Topic - Choose "None"
