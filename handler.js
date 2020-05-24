@@ -53,11 +53,7 @@ module.exports.forwarder = async event => {
     }
 
     if (Array.isArray(parsed.attachments) && parsed.attachments.length) {
-      const id = [];
-
-      parsed.attachments.forEach(() => {
-        id.push(nanoid());
-      });
+      const id = parsed.attachments.map(() => nanoid());
 
       console.log('Uploading attachments...');
       const files = await upload(id, parsed.attachments);
