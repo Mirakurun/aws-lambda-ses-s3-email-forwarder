@@ -1,6 +1,7 @@
 const AWS = require('aws-sdk');
 const { simpleParser } = require('mailparser');
 const nanoid = require('nanoid');
+const { Iconv } = require('iconv');
 const { config } = require('./config/config');
 const { render } = require('./services/render');
 const { upload } = require('./services/upload');
@@ -33,7 +34,7 @@ module.exports.forwarder = async event => {
       .promise();
 
     console.log('Parsing email...');
-    const parsed = await simpleParser(data.Body);
+    const parsed = await simpleParser(data.Body, { Iconv });
 
     const { name, address } = parsed.from.value[0];
     const { html } = parsed;
