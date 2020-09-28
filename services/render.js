@@ -86,11 +86,11 @@ exports.render = (id, attachments) => {
                 id[index]
               }/${this.fixedEncodeURIComponent(filename)}`;
             }
-            return `https://s3.${config.region}.amazonaws.com/${
-              config.bucket
-            }/${config.attachmentPrefix}${this.fixedEncodeURIComponent(
-              filename
-            )}`; // Path-Style Access, see https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html
+            return `https://${config.bucket}.s3.${
+              config.region
+            }.amazonaws.com/${
+              config.attachmentPrefix
+            }${this.fixedEncodeURIComponent(filename)}`; // Path-Style Access, see https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html
           },
           isMatchExt(arr, filename) {
             return arr.includes(this.getFileExt(filename));
